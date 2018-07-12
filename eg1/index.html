@@ -21,8 +21,11 @@
     <script type="text/babel">
         // 3. 從 window.App 中，取得 TodoApp 元件
         const { TodoApp } = window.App;
+        const props = {
+            username: "John",
+        }
         ReactDOM.render(
-          <TodoApp />, // 4. 將 TodoApp 元件渲染在 container 中
+          <TodoApp {...props}/>, // 4. 將 TodoApp 元件渲染在 container 中
           document.getElementById('app')
         );
     </script>

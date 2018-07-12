@@ -2,18 +2,19 @@ const TodoItem = window.App.TodoItem
 
 class TodoList extends React.Component {
     render(){
+        const {todos, onDeleteTodo} = this.props
+        const todoElements = todos.map((todo) => 
+            <li key={todo.id}>
+                <TodoItem
+                    title={todo.title}
+                    completed={todo.completed}
+                    onDelete = {()=> onDeleteTodo && onDeleteTodo(todo.id)}
+                />
+            </li>
+        );
+
         return (
-            <ul>
-                <li>
-                    <TodoItem/>
-                </li>
-                <li>
-                    <TodoItem/>
-                </li>
-                <li>
-                    <TodoItem/>
-                </li>
-            </ul>
+            <ul>{todoElements}</ul>
         )
     }
 }

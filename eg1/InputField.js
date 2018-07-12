@@ -1,7 +1,7 @@
 class InputField extends React.Component {
     render(){
         return (
-            <div>TodoHeader</div>
+            <input {...this.props} type="text"/>
         )
     }
 }

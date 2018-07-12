@@ -6,14 +6,41 @@ const {
 } = window.App;
 
 class TodoApp extends React.Component {
+    constructor(props, context){
+      super(props, context)
+      this.state = {
+        todos: [
+          {
+            id: 0,
+            title: 'Item 1',
+            completed: false
+          },
+          // ...
+        ],
+      } 
+    }
+    _deleteTodo(id) {
+      todos = this.state.todos
+      const idx = todos.findIndex((todo) => todo.id === id);
+      if (idx !== -1) todos.splice(idx, 1);
+      return todos;
+    }
     // 2. 必須實作 render 方法：
     //    透過該方法回傳的元素，讓 React 瞭解要如何繪製該元件在頁面上
     render() {
+      // destructing assignment
+      const {username} = this.props
       return (
         <div>
-          <TodoHeader />
-          <InputField />
-          <TodoList />
+          <TodoHeader name="代辦事項" username={username} todoCount={this.state.todos.filter((todo) => !todo.completed).length}/>
+          <InputField placeholder="plz type here" />
+          <TodoList todos={this.state.todos} onDeleteTodo={
+            (id)=>{
+              this.setStates({
+                todos: this._deleteTodo(id),
+              })
+            }
+          }/>
         </div>
       );
     }
